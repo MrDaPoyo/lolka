@@ -32,4 +32,4 @@ def redirect_url(short_url):
         return render_template("index.html", not_found=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
