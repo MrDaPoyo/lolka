@@ -1,4 +1,2 @@
-Django==5.0.4
-django-crispy-forms
-crispy-bootstrap5
-numpy
+flask
+numpy==1.26.4
