@@ -19,7 +19,7 @@ def index():
             short_url = create_url()
         shortened_urls[short_url] = long_url
         print(shortened_urls)
-        return f"Shortened URL: {short_url}"
+        return render_template("index.html", short_url=short_url)
     else:
         return render_template('index.html')
 
@@ -28,8 +28,8 @@ def redirect_url(short_url):
     long_url = shortened_urls.get(short_url)
     if long_url: 
         return redirect(long_url)
-    else: 
-        return f"URL not found"
+    else:
+        return render_template("index.html", not_found=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
