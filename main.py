@@ -14,19 +14,22 @@ def create_url(lenght=6):
 def index():
     if request.method == 'POST':
         long_url = request.form['long_url']
+        short_url = create_url()
         while short_url in shortened_urls:
             short_url = create_url()
         shortened_urls[short_url] = long_url
         print(shortened_urls)
         return f"Shortened URL: {short_url}"
-    elif request.method == 'GET':
+    else:
         return render_template('index.html')
 
 @app.route('/<short_url>')
 def redirect_url(short_url):
     long_url = shortened_urls.get(short_url)
-    if long_url: return redirect(shortened_urls[long_url])
-    else: return f"URL not found"
+    if long_url: 
+        return redirect(long_url)
+    else: 
+        return f"URL not found"
 
 if __name__ == '__main__':
     app.run(debug=True)
