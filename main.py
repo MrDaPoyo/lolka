@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 shortened_urls = {}
 shortened_urls = json.load(open("urls.json", "+r"))
+print(shortened_urls)
 
 def create_url(lenght=6):
     letters = string.ascii_letters + string.digits
@@ -17,9 +18,6 @@ def index():
     if request.method == 'POST':
         long_url = request.form['long_url']
         short_url = create_url()
-
-        if long_url in shortened_urls.values():
-            return "error: url already shortened"
 
         while short_url in shortened_urls:
             short_url = create_url()
