@@ -4,7 +4,8 @@ import string, random
 
 app = Flask(__name__)
 
-shortened_urls = json.load(open('urls.json', 'r'))
+shortened_urls = {}
+shortened_urls = json.load(open("urls.json", "+r"))
 
 def create_url(lenght=6):
     letters = string.ascii_letters + string.digits
@@ -16,10 +17,13 @@ def index():
     if request.method == 'POST':
         long_url = request.form['long_url']
         short_url = create_url()
+
+        if long_url in shortened_urls.values():
+            return "error: url already shortened"
+
         while short_url in shortened_urls:
             short_url = create_url()
-        if long_url in shortened_urls:
-            print("This URL is already shortened")
+        
         shortened_urls[short_url] = long_url
         with open('urls.json', '+w') as file:
             json.dump(shortened_urls, file)
