@@ -33,7 +33,7 @@ def index():
 def redirect_url(short_url):
     long_url = shortened_urls.get(short_url)
     if long_url: 
-        return redirect("http://" + long_url)
+        return redirect('http://' + long_url)
     else:
         return render_template("index.html", not_found=True)
 
